@@ -1,0 +1,251 @@
+<!--ECF JONATHAN-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>APIMOCK</title>
+    <style>
+      #j1 {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      #j1 td,
+      #j1 th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+      #j1 tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      #j1 tr:hover {
+        background-color: #ddd;
+      }
+      #j1 th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #04aa6d;
+        color: white;
+      }
+      .reader {
+        background-color: #4caf50; /* Green */
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 5px 3px 5px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+      }
+      h1 {
+        text-align: center;
+        text-transform: uppercase;
+        color: #4caf50;
+      }
+      div {
+        border: 1px solid gray;
+        padding: 8px;
+      }
+      #formtoadd{
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Api mock</h1>
+    <div>
+      <p>
+        Lecture de l'adresse depuis:
+        <a href="https://6057e432c3f49200173ad08d.mockapi.io/employees"
+          >https://6057e432c3f49200173ad08d.mockapi.io/employees</a
+        >
+      </p>
+      <button class="reader" type="button" onclick="lance()">
+        Charger la liste
+      </button>
+      <button class="reader" type="button" onclick="unshow() ">
+        Recharger la liste
+      </button>
+      <div id="adress-output">
+        <table id="j1">
+          <tr>
+            <th>id</th>
+            <th>last_name</th>
+            <th>Name</th>
+            <th>Job Title</th>
+            <th>email</th>
+            <th>select</th>
+            <th>Delete</th>
+          </tr>
+        </table>
+      </div>
+      <button class="reader" type="submit" onclick="showform()">
+        Add an element
+      </button>
+      <button class="reader" type="button" onclick="updateitem()">
+        Mettre a jour l'élément
+      </button>
+      <!--<div id="GFG_DOWN"></div>-->
+
+      <form id="formtoadd">
+      <label>Last Name:
+        <input type="text" placeholder="Last Name" id="newitemlast_name" />
+      </label>
+      <label>First Name:
+        <input type="text" placeholder="First Name"  id="newitemname" />
+      </label>
+      <label>Job Title:
+        <input type="text" placeholder="Titre du job" id="newitemjob_title"/>
+      </label>
+      <label>email:
+        <input type="email" placeholder="joedoe@gmail.com"  id="newitememail"/>
+      </label>
+      </form>
+      <!--
+      <form method="post" action="https://6057e432c3f49200173ad08d.mockapi.io/employees" id="newitem" style="display: none">
+        <label
+          >id:
+          <input type="number" placeholder="id" />
+        </label>
+        <label
+          >last_name:
+          <input type="text" placeholder="last_name" />
+        </label>
+        <label
+          >Name:
+          <input type="text" placeholder="Name" />
+        </label>
+        <label
+          >Job Title:
+          <input type="text" placeholder="Titre du job" />
+        </label>
+        <label
+          >email:
+          <input type="email" placeholder="joedoe@gmail.com" />
+        </label>
+        <label
+          >firstname:
+          <input type="text" placeholder="First Name" />
+        </label>
+        <label
+          >lastname:
+          <input type="text" placeholder="Last Name" /> </label
+        >--><br />
+        <button class="reader" type="submit" onclick="additem()"">
+          Save
+        </button>
+        <button class="reader" type="button" onclick="hideForm()">
+          Cancel
+        </button>
+      </form>
+    </div>
+    <script>
+      function showform() {
+        document.getElementById("formtoadd").setAttribute("style", "display: block");
+      }
+
+
+      /*Remplir le tableau avec les données*/
+      function lance() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            var x = this.responseText;
+            var xparsed = JSON.parse(x);
+            const info = document.getElementById("j1");
+            //*for (let i = 0; i < xparsed.length; i++) {
+            // var newlist= xparsed[i]
+            console.log("typeof info", typeof info);
+            xparsed.forEach((element) => {
+              info.innerHTML += "<tr>";
+              info.innerHTML +=
+                "<td>" +
+                element.id +
+                "</td>" +
+                "<td>" +
+                element.last_name +
+                "</td>" +
+                "<td>" +
+                element.name +
+                "</td>" +
+                "<td>" +
+                element.job_title +
+                "</td>" +
+                "<td>" +
+                element.email +
+                "</td>" +
+                "<td><button type=button onclick='alter()'>modif</button></td>" +
+                "<td><button type=button onclick='Supp()'>Supp</button></td>";
+              info.innerHTML += "</tr>";
+              //});
+            });
+          } else {
+            //document.getElementById("adress-output").innerHTML="error";
+            console.log("dans le else de la fonction lance");
+          }
+        };
+        xhttp.open(
+          "GET",
+          "https://6057e432c3f49200173ad08d.mockapi.io/employees",
+          true
+        );
+        xhttp.send();
+      }
+
+
+      /*Funtion permettant d'ajouter un item a la liste*/
+      function additem() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            var x = this.responseText;
+            var xparsed = JSON.parse(x);
+            console.log(xparsed);
+          } else {
+            //document.getElementById("adress-output").innerHTML="error";
+            console.log("dans le else de la fonction alter");
+          }
+        };
+        xhttp.open(
+          "POST",
+          "https://6057e432c3f49200173ad08d.mockapi.io/employees",
+          true
+        );
+        xhttp.setRequestHeader(
+          "Content-type",
+          "application/x-www-form-urlencoded"
+        );
+        
+        xhttp.send(
+          "name=" + document.getElementById("newitemlast_name").value + "&" +
+          "last_name=" + document.getElementById("newitemname").value + "&" +
+          "job_title=" + document.getElementById("newitemjob_title").value + "&" +
+          "email=" + document.getElementById("newitememail").value
+        );
+        console.log("apres le send de obj");
+      }
+      
+            /*Function pour modifier un item de la liste*/
+            function alter() {
+              var rows = document.getElementById("j1").rows;
+              for (i = 0; i < rows.length; i++) {
+                rows[i].onclick = (function () {
+                  return function () {
+                    var id = this.cells[0].innerHTML;
+                    var nom = this.cells[1].innerHTML;
+                    var ijob = this.cells[2].innterHTML;
+                    alert("id:" + id +"\n"+ "name:"+nom+ "\n"+ "job title: "+ ijob);
+                  };
+                })(rows[i]);
+              }
+            }
+            window.onload = alter();
+    </script>
+  </body>
+</html>
