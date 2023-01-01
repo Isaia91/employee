@@ -36,15 +36,16 @@
               >https://6057e432c3f49200173ad08d.mockapi.io/employees</a
             >
           </p>
-          <!--Charger la liste-->
-          <button class="reader" type="button" onclick="lance()">
+          <!-- Button pour charger la liste-->
+          <button alt="eye button to show" class="reader" type="button" onclick="callNfill()">
             <span class="fa-stack fa-1x icons_margin">
               <i class="fa-solid fa fa-circle fa-stack-2x"></i>
               <i class="fa-regular fa-eye fa-inverse fa-stack-1x"></i>
             </span>
           </button>
-          <!--Recharger la liste apres modif-->
+          <!--Button pour recharger la page pour faire un nouvel appel-->
           <button
+            alt="rotate arrow button to reload the page"
             class="reader"
             type="button"
             onclick="document.location.reload(true)"
@@ -73,7 +74,9 @@
           <!--Fin div table-->
         </div>
         <!--Fin div col-md-->
+        <!--Boutton pour ajouter un élément a la liste en appelant une modal-->
         <button
+          alt="button to add an item"
           type="button"
           class="btn btn-primary"
           data-toggle="modal"
@@ -109,6 +112,7 @@
     <!--Modal pour modifier-->
     <div class="modal fade" id="test" role="dialog">
       <div class="modal-dialog">
+        <!--Contenu de la modal-->
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title">Modifier l'item</h4>
@@ -137,13 +141,13 @@
             <button type="button" class="btn btn-default" data-dismiss="modal">
               Fermer
             </button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id="savethemodif" onclick="bonjour(identifiant)">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="savethemodif" onclick="alter(identifiant)"> <!--Clicker pour sauvegarder la modif-->
               save
             </button>
           </div>
-        </div>
+        </div><!--Fin Contenu de la modal-->
       </div>
-    </div>
+    </div><!--Fin modal pour modifier-->
 
     <!--Modal Pour ajouter-->
     <div
@@ -209,17 +213,14 @@
                 class="btn btn-primary"
                 onclick="additem()"
                 data-dismiss="modal"
-              >
+              ><!--Clicker pour ajouter un item en faisant appel a une fonction-->
                 Ajouter
               </button>
             </div>
           </div>
-        </div>
-      </div>
-      <!--Fin modal pour ajouter-->
-    </div>
-    <!--Fin div container-->
-
+        </div><!--Fin contenu modal pour ajouter-->
+      </div><!--Fin modal pour ajouter-->
+    </div><!--Fin div container-->
     <script src="script.js"></script>
   </body>
 </html>

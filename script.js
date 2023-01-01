@@ -93,7 +93,7 @@ function fill(id) {
   console.log("fill function success for the id : " + id);
 }
 
-function bonjour(identifiant) {
+function alter(identifiant) {
   console.log("welcome in alter function to update, the item," + identifiant);
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -126,9 +126,9 @@ function bonjour(identifiant) {
 }
 
 /*Remplir le tableau avec les données*/
-function lance() {
+function callNfill() {
   console.log(
-    "welcome in lance function to get data from api and fill a html table"
+    "welcome in callNfill function to get data from api and fill a html table"
   );
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
