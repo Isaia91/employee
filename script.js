@@ -127,6 +127,7 @@ function alter(identifiant) {
       "email=" +
       document.getElementById("alteritememail").value
   );
+  
 }
 
 /*Create and Fill a table after ajax call (get method)|Creer et Remplir le tableau avec les données*/
