@@ -134,7 +134,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="Supprimeritem()">Supprimer</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="Supprimeritem(id)">Supprimer</button>
         </div>
       </div>
       
@@ -210,7 +210,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick='getid()' data-dismiss="modal">Ajouter</button>
+          <button type="button" class="btn btn-primary" onclick='alter()' data-dismiss="modal">Ajouter</button>
         </div>
       </div>
     </div>
@@ -247,8 +247,8 @@
                 "<td>" +
                 element.email +
                 "</td>" +
-                "<td><button type=button  class='btn btn-info' data-toggle='modal' data-target='#myModaltoalter'><i class='fas fa-pencil'></i></button></td>" +
-                "<td><button type='button' class='btn btn-danger' data-toggle='modal' data-target='#myModaltodelete' title='Delete'><i class='fas fa-trash fa-inverse'></i></button></td>";
+                '<td><button type=button  class="btn btn-info" onclick="getid('+element.id+')"" ><i class="fas fa-pencil"></i></button></td>' +
+                '<td><button type="button"  class="btn btn-danger" onclick="showdeletemodal('+element.id+')" data-toggle="modal" data-target="#myModaltodelete" title="Delete"><i class="fas fa-trash fa-inverse"></i></button></td>';
               info.innerHTML += "</tr>";
               //});
             });
@@ -300,8 +300,9 @@
       
 
         /*Function pour modifier un item de la liste*/
-        function getid() {
-          
+        function showdeletemodal(id) {
+          console.log("l'id de cette ligne est :" + id)
+          /** pour parcourir le tableau
           var rows = document.getElementById("j1").rows;
           for (i = 0; i < rows.length; i++) {
               rows[i].onclick = (function () {
@@ -309,17 +310,21 @@
                   var id = this.cells[0].innerHTML;
                   var nom = this.cells[1].innerHTML;
                   var ijob = this.cells[2].innterHTML;
-                // alert("id:" + id +"\n"+ "name:"+nom+ "\n"+ "job title: "+ ijob);
-                console.log(id) 
+                  return id
+                alert("id:" + id +"\n"+ "name:"+nom+ "\n"+ "job title: "+ ijob);
+                console.log(id )
                 };
                 
               })(rows[i]);
           }
+          console.log(id)*/
+
           var xhttp = new XMLHttpRequest();
           xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             var x = this.responseText;
             var xparsed = JSON.parse(x);
+            console.log(xparsed)
             
             //*for (let i = 0; i < xparsed.length; i++) {
             // var newlist= xparsed[i]
@@ -331,14 +336,41 @@
         };
         xhttp.open(
           "GET",
-          "https://6057e432c3f49200173ad08d.mockapi.io/employees"+id,
+          "https://6057e432c3f49200173ad08d.mockapi.io/employees/"+id,
           true
         );
         xhttp.send();
+        Supprimeritem(id)//R
       }
-                      
-        function Supprimeritem(){
-          console.log('tu as bien supprimer l item')
+                     
+      
+        
+        function Supprimeritem(id){
+          
+          /*
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            var x = this.responseText;
+            var xparsed = JSON.parse(x);
+            console.log(xparsed)
+            
+            //*for (let i = 0; i < xparsed.length; i++) {
+            // var newlist= xparsed[i]
+            //console.log("le retour du get pour un id est:"+ xparsed);
+          } else {
+            //document.getElementById("adress-output").innerHTML="error";
+            //console.log("dans le else de la fonction lance");
+          }
+        };
+        xhttp.open(
+          "DELETE",
+          "https://6057e432c3f49200173ad08d.mockapi.io/employees/"+id,
+          true
+        );
+        xhttp.send(JSON.stringify({id: id,}));
+          console.log('tu as bien supprimer l item')*/
+          console.log('pour supprimer'+id)
         }
 
 
