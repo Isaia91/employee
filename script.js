@@ -1,4 +1,4 @@
-var identifiant = null; // variable global recevant la valeur de l'id pour pouvoir l'utiliser dans des fonctions
+var identifiant = null; // variable global recevant la valeur de l'id pour pouvoir l'utiliser dans des fonctions |global variable to be reused
 
 /* Fonction pour mettre a jour un item
 
@@ -36,6 +36,8 @@ function edititem() {
   );
 }*/
 
+
+/*Function to Delete| pourSupprimer */
 function deleteitem(id) {
   console.log("welcome in function deleteitem for the id :" + id);
   var result = confirm("Vous allez supprimer l'élément");
@@ -61,6 +63,7 @@ function deleteitem(id) {
   }
 }
 
+/*Func to Fill a form|pour remplir un formulaire */
 function fill(id) {
   console.log(
     "welcome in fill function to fill a form with details from " + id
@@ -93,6 +96,7 @@ function fill(id) {
   console.log("fill function success for the id : " + id);
 }
 
+/*Func to alter an item only send (put method)|pour modifier un item envoie uniquement(put method)*/
 function alter(identifiant) {
   console.log("welcome in alter function to update, the item," + identifiant);
   var xhttp = new XMLHttpRequest();
@@ -107,7 +111,7 @@ function alter(identifiant) {
     "PUT",
     "https://6057e432c3f49200173ad08d.mockapi.io/employees/" + identifiant,
     true
-  );
+  );//get url with id at the end to locate the good item
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
   xhttp.send(
@@ -125,7 +129,7 @@ function alter(identifiant) {
   );
 }
 
-/*Remplir le tableau avec les données*/
+/*Create and Fill a table after ajax call (get method)|Creer et Remplir le tableau avec les données*/
 function callNfill() {
   console.log(
     "welcome in callNfill function to get data from api and fill a html table"
@@ -139,6 +143,8 @@ function callNfill() {
       //*for (let i = 0; i < xparsed.length; i++) {
       // var newlist= xparsed[i]
       //console.log("typeof info", typeof info);
+
+      //We need to fill the table by creating rows by rows and fill them
       xparsed.forEach((element) => {
         info.innerHTML +=
           "<tr>" +
@@ -182,7 +188,7 @@ function callNfill() {
   xhttp.send();
 }
 
-/*Funtion permettant d'ajouter un item a la liste*/
+/*Function to add a new item (post method)|Funtion permettant d'ajouter un item a la liste*/
 function additem() {
   console.log("welcome to additem function, to add item with post methdod");
   var xhttp = new XMLHttpRequest();
@@ -203,7 +209,7 @@ function additem() {
   );
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-  //poster les valeurs des champs du formulaire de la modale
+  //Post data from the form modal|poster les valeurs des champs du formulaire de la modale
   xhttp.send(
     "name=" +
       document.getElementById("newitemlast_name").value +
@@ -233,7 +239,7 @@ function additem() {
   );
 }
 
-/*Function pour récupérer un item de la liste*/
+/*Function to get an id from the list|Function pour récupérer un item de la liste*/
 function getid(id) {
   console.log("welcome to getid function, to get data from id like, " + id);
   /** pour parcourir le tableau
@@ -272,7 +278,7 @@ function getid(id) {
     "GET",
     "https://6057e432c3f49200173ad08d.mockapi.io/employees/" + id,
     true
-  );
+  );// add id at the end of url to  located the good item
   xhttp.send();
   return id;
 }
