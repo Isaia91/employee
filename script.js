@@ -1,6 +1,9 @@
-var identifiant = null;
+var identifiant = null; // variable global recevant la valeur de l'id pour pouvoir l'utiliser dans des fonctions
+
+/* Fonction pour mettre a jour un item
+
 function edititem() {
-  console.log("function editiem avec lid :" + id);
+  console.log(" welcom  in function editiem for the id :" + id);
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -31,10 +34,10 @@ function edititem() {
       "email=" +
       document.getElementById("alteritememail").value
   );
-}
+}*/
 
 function deleteitem(id) {
-  console.log("l'item a supprimer est id :" + id);
+  console.log("welcome in function deleteitem for the id :" + id);
   var result = confirm("Vous allez supprimer l'élément");
   if (result == true) {
     var xhttp = new XMLHttpRequest();
@@ -42,7 +45,7 @@ function deleteitem(id) {
       if (this.readyState == 4 && this.status == 200) {
         var x = this.responseText;
         var xparsed = JSON.parse(x);
-        console.log(xparsed);
+        //console.log(xparsed);
       } else {
       }
     };
@@ -52,23 +55,26 @@ function deleteitem(id) {
       true
     );
     xhttp.send(JSON.stringify({ id: id }));
-    console.log("tu as bien supprimer l item");
-    console.log(id);
+    console.log("success for the function delete item," + id + " is deleted");
+    //console.log(id);
   } else {
   }
 }
 
 function fill(id) {
   console.log(
-    "pour envoyé a :https://6057e432c3f49200173ad08d.mockapi.io/employees/" + id
+    "welcome in fill function to fill a form with details from " + id
   );
-  identifiant = id;
+  console.log(
+    "send at :https://6057e432c3f49200173ad08d.mockapi.io/employees/" + id
+  );
+  identifiant = id; // Recoit la valeur de id
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       var x = this.responseText;
       var xparsed = JSON.parse(x);
-      console.log(xparsed.id);
+      //console.log(xparsed.id);
       const info = document.getElementById("jsp");
       document.getElementById("alteritemlast_lastname").value =
         xparsed.last_name;
@@ -84,11 +90,11 @@ function fill(id) {
     true
   );
   xhttp.send();
-  console.log("voici l'id de fill id:" + id);
+  console.log("fill function success for the id : " + id);
 }
 
 function bonjour(identifiant) {
-  console.log("le click pour sauvegarder les modifs" + identifiant);
+  console.log("welcome in alter function to update, the item," + identifiant);
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -121,6 +127,9 @@ function bonjour(identifiant) {
 
 /*Remplir le tableau avec les données*/
 function lance() {
+  console.log(
+    "welcome in lance function to get data from api and fill a html table"
+  );
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -175,6 +184,7 @@ function lance() {
 
 /*Funtion permettant d'ajouter un item a la liste*/
 function additem() {
+  console.log("welcome to additem function, to add item with post methdod");
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 201) {
@@ -193,6 +203,7 @@ function additem() {
   );
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
+  //poster les valeurs des champs du formulaire de la modale
   xhttp.send(
     "name=" +
       document.getElementById("newitemlast_name").value +
@@ -207,11 +218,24 @@ function additem() {
       document.getElementById("newitememail").value
   );
   //console.log("apres le send de obj");
+    console.log(
+    "You posted : name = " +
+      document.getElementById("newitemlast_name").value +
+      " & " +
+      "last_name = " +
+      document.getElementById("newitemname").value +
+      " & " +
+      "job_title = " +
+      document.getElementById("newitemjob_title").value +
+      " & " +
+      "email = " +
+      document.getElementById("newitememail").value
+  );
 }
 
 /*Function pour récupérer un item de la liste*/
 function getid(id) {
-  console.log("l'id de cette ligne est :" + id);
+  console.log("welcome to getid function, to get data from id like, " + id);
   /** pour parcourir le tableau
             var rows = document.getElementById("j1").rows;
             for (i = 0; i < rows.length; i++) {
